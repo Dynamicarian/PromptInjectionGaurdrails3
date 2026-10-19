@@ -10,9 +10,12 @@ def init():
     connection.init_conn()
 
 def process_prompt(prompt):
-    # normalise prompt here
-    result = model.process_prompt(prompt)
-    result["prompt"] = prompt
+
+    # here is where prompt should be normalised
+    normalised_prompt = prompt
+
+    result = model.process_prompt(normalised_prompt)
+    result["prompt"] = normalised_prompt
     result["timestamp"] = time.time()
     result["datetime"] = datetime.now().strftime("%d-%m-%Y %H:%M:%S")
     db.add_result(result)
