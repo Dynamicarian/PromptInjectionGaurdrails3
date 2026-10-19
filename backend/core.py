@@ -10,6 +10,7 @@ def init():
     connection.init_conn()
 
 def process_prompt(prompt):
+    # normalise prompt here
     result = model.process_prompt(prompt)
     result["prompt"] = prompt
     result["timestamp"] = time.time()

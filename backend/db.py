@@ -27,7 +27,11 @@ def init():
                 f_entropy REAL NOT NULL,
                 binary_clustering INTEGER NOT NULL,
                 attack_type TEXT NOT NULL,
-                attack_type_distance REAL NOT NULL
+                p_jailbreaking REAL NOT NULL,
+                p_role_playing REAL NOT NULL,
+                p_code_execution REAL NOT NULL,
+                p_obfuscation REAL NOT NULL,
+                p_data_leakage REAL NOT NULL
             )
         """)
 
@@ -41,8 +45,10 @@ def add_result(result):
                     f_override_phrase_count, f_suspicious_action_count,
                     f_sensitive_target_count, f_entropy,
                 binary_clustering, 
-                attack_type, attack_type_distance)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                attack_type,
+                    p_jailbreaking, p_role_playing, p_code_execution,
+                    p_obfuscation, p_data_leakage)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             """,
             (
                 result['prompt'],
@@ -64,7 +70,11 @@ def add_result(result):
                 result['supervised']['features']['entropy'],
                 result['binary_clustering'],
                 result['attack_type']['label'],
-                result['attack_type']['distance']
+                result['attack_type']['percentages']['jailbreaking'],
+                result['attack_type']['percentages']['role_playing'],
+                result['attack_type']['percentages']['code_execution'],
+                result['attack_type']['percentages']['obfuscation'],
+                result['attack_type']['percentages']['data_leakage']
             )
         )
 
@@ -101,7 +111,13 @@ def get_results():
             "binary_clustering": bool(row["binary_clustering"]),
             "attack_type": {
                 "label": row["attack_type"],
-                "distance": row["attack_type_distance"]
+                "percentages": {
+                    "jailbreaking": row["p_jailbreaking"],
+                    "role_playing": row["p_role_playing"],
+                    "code_execution": row["p_code_execution"],
+                    "obfuscation": row["p_obfuscation"],
+                    "data_leakage": row["p_data_leakage"],
+                }
             }
         }
         for row in rows
@@ -144,7 +160,13 @@ def get_result(id):
         "binary_clustering": bool(row["binary_clustering"]),
         "attack_type": {
             "label": row["attack_type"],
-            "distance": row["attack_type_distance"]
+            "percentages": {
+                "jailbreaking": row["p_jailbreaking"],
+                "role_playing": row["p_role_playing"],
+                "code_execution": row["p_code_execution"],
+                "obfuscation": row["p_obfuscation"],
+                "data_leakage": row["p_data_leakage"],
+            }
         }
     }
 
