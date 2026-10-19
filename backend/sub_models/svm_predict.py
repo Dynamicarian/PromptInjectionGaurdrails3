@@ -216,29 +216,23 @@ def create_prediction_features(prompt):
         "entropy": entropy(normalized),
     }
 
-    #convert the features into a dataframe
-    #the column order must match the data used during SVM training
+    return features
+
+def features_to_dataframe(features):
     return pd.DataFrame(
         [[features[column] for column in FEATURE_COLUMNS]],
         columns=FEATURE_COLUMNS,
     )
 
-
 # use the trained SVM to predict whether a new prompt is benign or malicious
 def predict_supervised(prompt):
-
-    # convert the user prompt into the required model features
     features = create_prediction_features(prompt)
+    return {
+        "label": predict_supervised_with_features(features),
+        "features": features
+    }
 
-    
-    # this is for debugging section
-    # use the saved SVM model to make the prediction
-    # temporary debugging
-    #print("\nFeatures sent to SVM:")
-    #print(features.to_string(index=False))
-
-
-
-    prediction = model.predict(features)
-    # return the prediction as an integer 0/1
+def predict_supervised_with_features(features):
+    features_df = features_to_dataframe(features)
+    prediction = model.predict(features_df)
     return int(prediction[0])

@@ -1,2 +1,3 @@
 venv/
 results.db
+__pycache__

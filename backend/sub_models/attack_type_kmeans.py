@@ -18,7 +18,9 @@ def predict_attack_type(prompt: str) -> dict:
     normalised_prompt = normalize_prompt(prompt)
     embedding = np.asarray(list(embedding_model.embed(normalised_prompt)), dtype=float).reshape(1, -1)
 
+    #all clusters
     dists = kmeans.transform(embedding)[0]
+    # predicted cluster
     cluster = int(dists.argmin())
 
     return {
