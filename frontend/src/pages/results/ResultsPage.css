@@ -375,64 +375,6 @@
   color: #64748b;
   cursor: default;
 }
-
-
-/* Flip button */
-.safety-flip-actions {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-}
-
-.safety-flip-actions button {
-    padding: 10px 20px;
-    background-color: #151b32;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-}
-
-.safety-flip-actions button:hover {
-    background-color: #293452;
-}
-
-/* Flip container */
-.safety-flip {
-    perspective: 1000px;
-    margin-top: 20px;
-}
-
-.safety-flip-inner {
-    position: relative;
-    display: grid;
-    transition: transform 0.6s ease;
-    transform-style: preserve-3d;
-}
-
-/* Rotate the card */
-.safety-flip.is-flipped .safety-flip-inner {
-    transform: rotateY(180deg);
-}
-
-/* Front and back faces */
-.safety-flip-face {
-    grid-area: 1 / 1;
-    position: relative;
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-    overflow: visible;
-}
-
-.safety-flip-back {
-    transform: rotateY(180deg);
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    justify-content: flex-start;
-    gap: 0;
-}
-
 /* Both donut containers */
 .attack-count-donut,
 .confidence-donut {
@@ -450,9 +392,111 @@
     text-align: left;
 }
 
-/* Accessibility */
+
+.result-banner__content {
+    flex: 1;
+    min-width: 0;
+}
+
+.pending-progress {
+    width: 100%;
+    margin-top: 12px;
+}
+
+.pending-progress-track {
+    width: 100%;
+    height: 10px;
+    background-color: #fef3c7;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.pending-progress-bar {
+    width: 30%;
+    height: 100%;
+    background-color: #d68b20;
+    border-radius: 10px;
+    animation: scanning 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes scanning {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(185%);
+    }
+}
+
+.pending-progress p {
+    margin-top: 8px;
+    color: #bf8018;
+    font-size: 12px;
+}
+
+/* Pagination information */
+.history-pagination-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 20px;
+    font-size: 13px;
+    color: #64748b;
+}
+
+.history-pagination-info p {
+    margin: 0;
+}
+
+.history-pagination-info label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.history-pagination-info select {
+    padding: 6px 10px;
+    border: 1px solid #e5e7eb;
+    border-radius: 5px;
+}
+
+/* Page buttons */
+.history-pagination {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 20px;
+}
+
+.history-pagination button {
+    padding: 8px 12px;
+    border: 1px solid #e5e7eb;
+    border-radius: 5px;
+    background: white;
+    color: #334155;
+    cursor: pointer;
+}
+
+.history-pagination button:hover:not(:disabled) {
+    background: #f1f5f9;
+}
+
+.history-pagination button.active {
+    background: #151b32;
+    color: white;
+    border-color: #151b32;
+}
+
+.history-pagination button:disabled {
+    opacity: 0.4;
+    cursor: default;
+}
+
 @media (prefers-reduced-motion: reduce) {
-    .safety-flip-inner {
-        transition: none;
+    .pending-progress-bar {
+        animation: none;
     }
 }
