@@ -1,4 +1,16 @@
+import { useState } from 'react';
+import Pagination from './Pagination.jsx';
 function PromptHistory({ history = [], selectedId, onSelect }) {
+
+    const [page, setPage] = useState(1);
+    const [pageSize, setPageSize] = useState(5);
+    // Calculate which records belong to this page
+    const total = history.length;
+    const pageCount = Math.max(1, Math.ceil(total / pageSize));
+    const currentPage = Math.min(page, pageCount);
+    const start = (currentPage - 1) * pageSize;
+    const visibleHistory = history.slice(start, start + pageSize);
+
     return (
         <section className="prompt-history">
             <h3>Prompt History</h3>
@@ -6,6 +18,7 @@ function PromptHistory({ history = [], selectedId, onSelect }) {
             {history.length === 0 ? (
                 <p>No previous prompts found.</p>
             ) : (
+                <>
                 <div className="history-table-wrapper">
                     <table className="history-table">
                         <thead>
@@ -17,7 +30,7 @@ function PromptHistory({ history = [], selectedId, onSelect }) {
                             </tr>
                         </thead>
                         <tbody>
-                            {history.map((item) => (
+                            {visibleHistory.map((item) => (
                                 <tr key={item.id}>
                                     {/* Submitted prompt */}
                                     <td className="history-prompt">
@@ -51,9 +64,17 @@ function PromptHistory({ history = [], selectedId, onSelect }) {
                                     </td>
                                 </tr>
                             ))}
-                        </tbody>
+                            </tbody>
                     </table>
                 </div>
+                <Pagination
+                    page={currentPage}
+                    setPage={setPage}
+                    pageSize={pageSize}
+                    setPageSize={setPageSize}
+                    total={total}
+                />
+                </>
             )}
         </section>
     );

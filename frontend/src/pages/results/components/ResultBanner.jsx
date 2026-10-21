@@ -1,3 +1,5 @@
+import PendingProgress from './PendingProgress.jsx';
+
 const bannerContent = {
   allowed: {
     title: "Prompt Cleared & Allowed",
@@ -30,9 +32,11 @@ function ResultBanner({ status }) {
         alt=""
         className="result-banner__icon"
       />
-      <div>
+      <div className="result-banner__content">
         <h2>{banner.title}</h2>
         <p>{banner.message}</p>
+
+        {status === "pending" && <PendingProgress />}
       </div>
     </section>
   );
