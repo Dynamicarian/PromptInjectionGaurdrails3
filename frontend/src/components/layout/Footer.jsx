@@ -1,3 +1,4 @@
+import { NavLink } from "react-router";
 
 function Footer() {
   return (
@@ -11,9 +12,7 @@ function Footer() {
 
         {/* Footer items */}
         <div className="footer-links">
-          <span>Contact Us</span>
-          <span>FAQ</span>
-          <span>GitHub Repository</span>
+          <NavLink to="/aboutUs">About Us</NavLink>
         </div>
       </div>
     </footer>
