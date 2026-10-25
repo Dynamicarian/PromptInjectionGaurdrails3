@@ -1,9 +1,14 @@
+import "../charts.css";
+
 export default function EmbeddingViz() {
-    return (
-        <iframe 
+  return (
+    <div className="chart-card">
+      <h2 className="chart-title">Attack type embeddings (3D)</h2>
+      <iframe
+        className="embedding-frame"
         src="/attack_type_embeddings_visualization_3d.html"
         title="Attack Type Data Embeddings 3D"
-        style={{ width: "100%", height: "700px", border: "none" }}
-        />
-    )
+      />
+    </div>
+  );
 }

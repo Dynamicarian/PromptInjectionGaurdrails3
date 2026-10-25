@@ -72,3 +72,7 @@ def get_data():
 @app.get("/model_report")
 def get_confusion_metrics():
     return data_report.confusion_metrics()
+
+@app.get("/threshold_report")
+def get_threshold_report():
+    return data_report.threshold_metrics()
