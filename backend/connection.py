@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from uuid import UUID
+import data_report
 import uvicorn
 import core
 
@@ -63,3 +64,7 @@ def get_latest_result_id():
 def delete_result_by_id(id: int):
     core.delete_result(id)
     return { "status": "success" }
+
+@app.get("/data")
+def get_data():
+    return data_report.get_data_report()

@@ -1,5 +1,14 @@
+import EmbeddingViz from "./charts/attack_type_embedding";
+import DataReport from "./charts/data_report";
+import DonutChart from "./charts/DonutChart";
+
 function OurData(){
-    return <h1>This is our data</h1>; 
+    return (<div>
+        <h1>Embedding Visualisation</h1>
+        <EmbeddingViz />
+        <DataReport /> 
+        <DonutChart /> 
+    </div>);  
 }; 
 
 export default OurData;
