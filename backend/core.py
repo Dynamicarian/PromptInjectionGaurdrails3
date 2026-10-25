@@ -5,17 +5,18 @@ import connection
 import time
 from datetime import datetime
 
+from advanced_security.unicode_normalization import normalize_prompt
 def init():
     db.init()
     connection.init_conn()
 
 def process_prompt(prompt):
 
-    # here is where prompt should be normalised
-    normalised_prompt = prompt
-
+    
+    normalised_prompt = normalize_prompt(prompt)
+    #normalised_prompt = prompt
     result = model.process_prompt(normalised_prompt)
-    result["prompt"] = normalised_prompt
+    result["prompt"] = prompt
     result["timestamp"] = time.time()
     result["datetime"] = datetime.now().strftime("%d-%m-%Y %H:%M:%S")
     db.add_result(result)
