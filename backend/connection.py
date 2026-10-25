@@ -68,3 +68,7 @@ def delete_result_by_id(id: int):
 @app.get("/data")
 def get_data():
     return data_report.get_data_report()
+
+@app.get("/model_report")
+def get_confusion_metrics():
+    return data_report.confusion_metrics()
