@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import './AboutUs.css'
 
 const CHARACTERISTICS = [
@@ -41,15 +40,6 @@ const FAQS = [
 
 const CONTACT_EMAIL = 'thisemailwillchange@gmail.com';
 
-// Valid email shape, and a domain containing an "edu" or "ac" label
-// (e.g. student.swin.edu.au, ox.ac.uk)
-function isAcademicEmail(value) {
-  const email = value.trim().toLowerCase();
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return false;
-  const labels = email.split('@')[1].split('.');
-  return labels.includes('edu') || labels.includes('ac');
-}
-
 function Chevron() {
   return (
     <svg className="about-chevron" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
@@ -58,98 +48,14 @@ function Chevron() {
   );
 }
 
-function FeedbackForm() {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [feedback, setFeedback] = useState('');
-  const [errors, setErrors] = useState({});
-  const [sent, setSent] = useState(false);
-
-  function handleSubmit(e) {
-    e.preventDefault();
-
-    const next = {};
-    if (name.trim() === '') next.name = 'Please enter your name.';
-    if (!isAcademicEmail(email)) next.email = 'Please enter a valid academic email address';
-    if (feedback.trim() === '') next.feedback = 'Please enter your feedback.';
-
-    setErrors(next);
-    setSent(false);
-    if (Object.keys(next).length > 0) return;
-
-    // TODO: send { name, email, feedback } to your backend here
-    console.log('Feedback submitted:', { name, email, feedback });
-    setName('');
-    setEmail('');
-    setFeedback('');
-    setSent(true);
-  }
-
+function ContactUs() {
   return (
-    <section className="about-card" aria-labelledby="feedback-heading">
-      <h2 id="feedback-heading" className="about-card-title">Send Us Feedback</h2>
-      <p className="about-card-subtitle">Your suggestions matter</p>
-
-      <form onSubmit={handleSubmit} noValidate>
-        <div className="about-field">
-          <label htmlFor="feedback-name">Your Name</label>
-          <input
-            id="feedback-name"
-            type="text"
-            placeholder="Type in your name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            aria-invalid={Boolean(errors.name)}
-            aria-describedby={errors.name ? 'feedback-name-error' : undefined}
-          />
-          {errors.name && (
-            <p id="feedback-name-error" className="about-error" role="alert">{errors.name}</p>
-          )}
-        </div>
-
-        <div className={`about-field${errors.email ? ' has-error' : ''}`}>
-          <label htmlFor="feedback-email">Academic Email Address</label>
-          <input
-            id="feedback-email"
-            type="email"
-            placeholder="name@university.edu"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            aria-invalid={Boolean(errors.email)}
-            aria-describedby={errors.email ? 'feedback-email-error' : undefined}
-          />
-          {errors.email && (
-            <p id="feedback-email-error" className="about-error" role="alert">
-              <span aria-hidden="true">⚠️</span> {errors.email}
-            </p>
-          )}
-        </div>
-
-        <div className="about-field">
-          <label htmlFor="feedback-message">Feedback</label>
-          <textarea
-            id="feedback-message"
-            rows={4}
-            placeholder="Type your suggestions..."
-            value={feedback}
-            onChange={(e) => setFeedback(e.target.value)}
-            aria-invalid={Boolean(errors.feedback)}
-            aria-describedby={errors.feedback ? 'feedback-message-error' : undefined}
-          />
-          {errors.feedback && (
-            <p id="feedback-message-error" className="about-error" role="alert">{errors.feedback}</p>
-          )}
-        </div>
-
-        <button type="submit" className="about-submit">Send Message</button>
-
-        {sent && (
-          <p className="about-success" role="status">Thanks, your message has been sent.</p>
-        )}
-      </form>
+    <section className="about-card" aria-labelledby="contact-heading">
+      <h2 id="contact-heading" className="about-card-title">Contact Us</h2>
+      <p className="about-card-subtitle">Got questions or suggestions? We'd love to hear from you.</p>
 
       <p className="about-direct">
-        Or email us directly at <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
+        Email us at <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
       </p>
     </section>
   );
@@ -184,7 +90,7 @@ function AboutUs() {
           </ul>
         </section>
 
-        <FeedbackForm />
+        <ContactUs />
       </div>
 
       <section className="about-faq" aria-labelledby="faq-heading">
