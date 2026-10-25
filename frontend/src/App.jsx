@@ -8,7 +8,6 @@ const AboutUsPage = lazy(() => import('./pages/about_us/AboutUs.jsx'))
 const OurData = lazy(() => import('./pages/our_data/OurData.jsx'))
 const TestPage = lazy(() => import('./pages/test/TestPage.jsx'))
 const SecurityResultsPage = lazy(() => import('./pages/security/SecurityResultsPage.jsx'));
-const NotFoundPage = lazy(() => import('./pages/not_found/NotFoundPage.jsx'))
 
 
 function App() {
@@ -21,7 +20,6 @@ function App() {
         <Route path="/ourData" element={<OurData/>}/>
         <Route path="/test" element={<TestPage/>}/>
         <Route path="/security-results" element={<SecurityResultsPage/>}/>
-        <Route path='*' element={<NotFoundPage/>}/>
       </Route>
     </Routes>
   );
