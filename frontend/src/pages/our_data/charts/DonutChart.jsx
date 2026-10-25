@@ -31,7 +31,7 @@ export default function DonutChart() {
 
   return (
     <div className="chart-card">
-      <h2 className="chart-title">Prompt distribution</h2>
+      <h2 className="chart-title">Data prompt distribution</h2>
       <div className="donut-wrapper">
         <PieChart width={300} height={300}>
           <Pie

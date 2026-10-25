@@ -17,6 +17,12 @@
   }
 }
 
+/*center the heading in our data page*/
+#data_heading {
+  display: flex; 
+  justify-content: center; 
+}
+
 /* shared card */
 .chart-card {
   background: var(--card-bg);
