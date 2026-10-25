@@ -1,0 +1,121 @@
+:root {
+  --card-bg: #ffffff;
+  --card-border: #e1e0d9;
+  --text-main: #0b0b0b;
+  --text-muted: #666666;
+  --blue: #2a78d6;
+  --orange: #eb6834;
+  --green: #1baf7a;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --card-bg: #1a1a19;
+    --card-border: #2c2c2a;
+    --text-main: #f0efec;
+    --text-muted: #a9a8a0;
+  }
+}
+
+/* shared card */
+.chart-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 1.25rem;
+  color: var(--text-main);
+}
+
+.chart-title {
+  margin: 0 0 1rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+/* 3D embedding iframe */
+.embedding-frame {
+  width: 100%;
+  height: 700px;
+  border: none;
+  border-radius: 8px;
+}
+
+/* donut chart */
+.donut-wrapper {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  margin: 0 auto;
+}
+
+.donut-center {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 300px;
+  height: 250px; /* leaves room for the legend below */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.donut-label {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.donut-total {
+  font-size: 28px;
+  font-weight: 500;
+}
+
+/* threshold chart */
+.threshold-slider {
+  width: 100%;
+  margin: 1rem 0 0.5rem;
+  accent-color: var(--blue);
+}
+
+.threshold-value {
+  margin: 0 0 1rem;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.threshold-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 12px;
+}
+
+.stat-tile {
+  background: rgba(128, 128, 128, 0.08);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+}
+
+.stat-tile .stat-label {
+  display: block;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.stat-tile .stat-value {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.stat-tile.good .stat-value { color: var(--green); }
+.stat-tile.bad .stat-value { color: var(--orange); }
+
+/* loading and error text */
+.chart-status {
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.chart-status.error {
+  color: var(--orange);
+}

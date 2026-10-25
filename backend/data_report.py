@@ -1,6 +1,7 @@
 import pandas as pd 
 from sklearn.model_selection import train_test_split
 from sub_models.svm_predict import model, FEATURE_COLUMNS
+import numpy as np
 from sklearn.metrics import (
     accuracy_score,
     precision_score,
@@ -48,3 +49,25 @@ def confusion_metrics():
         "fn": int(fn),
         "tp": int(tp),
     }
+
+
+def threshold_metrics(steps=100):
+    scores = model.decision_function(X_test)
+    y_true = np.asarray(y_test)
+    thresholds = np.linspace(scores.min(), scores.max(), steps)
+
+    rows = []
+    for t in thresholds:
+        pred = (scores >= t).astype(int)
+        tp = int(((pred == 1) & (y_true == 1)).sum())
+        fp = int(((pred == 1) & (y_true == 0)).sum())
+        fn = int(((pred == 0) & (y_true == 1)).sum())
+        tn = int(((pred == 0) & (y_true == 0)).sum())
+        rows.append({
+            "threshold": round(float(t), 3),
+            "precision": round(float(precision_score(y_true, pred, zero_division=0)), 3),
+            "recall": round(float(recall_score(y_true, pred, zero_division=0)), 3),
+            "f1": round(float(f1_score(y_true, pred, zero_division=0)), 3),
+            "tp": tp, "fp": fp, "fn": fn, "tn": tn,
+        })
+    return rows

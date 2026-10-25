@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import api from "../../../api";
+import "../charts.css";
 
 export default function DataReport() {
   const [result, setResult] = useState(null);
