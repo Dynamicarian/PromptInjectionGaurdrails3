@@ -1,5 +1,5 @@
-import { Link, useLocation } from "react-router-dom";
-import "../styles/notfound.css";
+import { Link, useLocation } from "react-router";
+import "./notfound.css";
 
 export default function NotFound() {
   const location = useLocation();
