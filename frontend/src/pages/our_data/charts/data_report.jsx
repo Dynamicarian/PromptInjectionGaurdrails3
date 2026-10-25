@@ -8,7 +8,7 @@ export default function DataReport() {
   useEffect(() => {
     async function load() {
       try {
-        const response = await api.get("/data");
+        const response = await api.get("/model_report");
         setResult(response.data);
       } catch (err) {
         setError(err.message);
@@ -19,6 +19,5 @@ export default function DataReport() {
 
   if (error) return <p>Error: {error}</p>;
   if (!result) return <p>Loading...</p>;
-
-  return <h1>{result.total}, {result.benign_prompt}, {result.malicious_prompt}</h1>;
+  return <h1>{result.f1}</h1>;
 }
