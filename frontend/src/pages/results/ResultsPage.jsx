@@ -211,9 +211,14 @@ function ResultsPage() {
           />
         </div>
         {/* Safety metrics - future component */}
+        {/* The result will be NULL for allowed and pending state */}
         <SafetyMetrics
           status={result.status}
-          attackTypeConfidences={result.attackTypeConfidences}
+          attackTypeConfidences={
+            result.status === "blocked"
+              ? result.attackTypeConfidences
+              : null
+          }
         />
       </div>
 
