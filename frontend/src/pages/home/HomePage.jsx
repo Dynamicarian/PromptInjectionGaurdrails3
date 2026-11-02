@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router';
 import api from '../../api'
 import './HomePage.css';
 
+const MAX_PROMPT_CHARS = 5000;
+
 function HomePage() {
   const [prompt, setPrompt] = useState("");
   const [error, setError] = useState("");
@@ -11,24 +13,32 @@ function HomePage() {
  
   async function handleSubmit(e) {
     e.preventDefault();
+    setError("");
     if (prompt.trim() === "") {
       setError("Please enter a prompt before submitting");
       return;
-    }
+    } 
 
     try {
       const response =  await api.post('/prompt', {prompt: prompt,}); 
       setPromptResponse(response.data); 
       console.log("Prompt has been send successfully");
+      navigate('/results', {state: {prompt}}); 
     } catch (error)
     { 
-      console.error('Error in send data', error); 
-      alert('Failed to send post')
-    }; 
+      console.log(error.response);               // useful while debugging
+      const status = error.response?.status;
 
-    setError("");
-    navigate('/results', {state: {prompt}}); 
-    console.log("Submitted Prompt:", prompt);
+      if (status === 422) {
+        setError("Your prompt is too long. The limit is 5000 characters.");
+      } else if (status === 503) {
+        setError("The server is busy right now. Try again in a few seconds.");
+      } else if (!err.response) {
+        setError("Can't reach the server. Check that the backend is running.");
+      } else {
+        setError("Failed to send the prompt. Please try again.");
+      } 
+    }; 
   }
 
   function onChange(e) {
