@@ -13,7 +13,7 @@ python -m venv .venv
 ```
 5. Activate venv (windows powershell):
 ```bash
-.\.venv\Scripts\Activate.ps1
+venv\Scripts\Activate.ps1
 ```
 6. Install requirements:
 ```bash

@@ -13,13 +13,11 @@ function HomePage() {
  
   async function handleSubmit(e) {
     e.preventDefault();
+    setError("");
     if (prompt.trim() === "") {
       setError("Please enter a prompt before submitting");
       return;
-    } else if (prompt.length > MAX_PROMPT_CHARS) {
-      setError(`Your prompt is too long. The limit is ${MAX_PROMPT_CHARS} characters.`);
-      return;
-    }
+    } 
 
     try {
       const response =  await api.post('/prompt', {prompt: prompt,}); 
@@ -41,9 +39,6 @@ function HomePage() {
         setError("Failed to send the prompt. Please try again.");
       } 
     }; 
-
-    setError("");
-    
   }
 
   function onChange(e) {

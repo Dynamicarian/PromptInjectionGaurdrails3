@@ -21,6 +21,10 @@ function Navbar() {
             Results
           </NavLink>
 
+          <NavLink to="/security-results">
+            Advanced Security
+          </NavLink>
+
           <NavLink to="/aboutUs">About Us</NavLink>
           <NavLink to="/ourData">Our Data</NavLink>
 
