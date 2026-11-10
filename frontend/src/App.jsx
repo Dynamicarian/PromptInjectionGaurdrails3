@@ -20,6 +20,8 @@ function App() {
         <Route path="/ourData" element={<OurData />} />
         <Route path="/test" element={<TestPage />} />
         <Route path="/security-results" element={<SecurityResultsPage />} />
+        <Route path="/contact" element={<AboutUsPage />} />
+        <Route path="/faq" element={<AboutUsPage />} />
         <Route path="/error/:code" element={<ErrorPage />} />
         <Route path="*" element={<ErrorPage code="NOT_FOUND" />} />
       </Route>

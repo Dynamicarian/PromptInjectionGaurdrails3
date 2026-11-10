@@ -17,6 +17,19 @@
   }
 }
 
+.our-data {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 32px 24px;
+}
+
+#distribution-heading,#metrics-heading,
+#embedding-heading {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
 /*center the heading in our data page*/
 #data_heading {
   display: flex; 
@@ -125,3 +138,12 @@
 .chart-status.error {
   color: var(--orange);
 }
+
+.data-description {
+  margin: 0.75rem auto 1.5rem;
+  padding: 0.9rem 1.1rem;
+  font-size: 0.95rem;
+  line-height: 1.65;
+  text-align: left;
+  color: var(--text-muted);
+} 

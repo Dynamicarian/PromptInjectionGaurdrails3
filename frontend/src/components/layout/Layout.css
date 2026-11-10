@@ -112,6 +112,12 @@
   color: #64748b;
 }
 
+.footer-links a {
+  text-decoration: none;
+  color: #64748b;
+  font-size: 14px;
+}
+
 /* Responsive footer */
 @media (max-width: 700px) {
   .footer-container {

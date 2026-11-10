@@ -19,6 +19,31 @@ inflight = 0
 
 slots = threading.BoundedSemaphore(MAX_INFLIGHT)
 
+    
+def init_conn():
+    uvicorn.run(app)
+
+app = FastAPI()
+
+# class Message(BaseModel):
+#     message: str
+
+# CORS (Cross-Origin Resource Sharing) middleware configuration
+origins = [
+    "http://localhost:5173",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=False, # no user login 
+    allow_methods=["POST", "GET", "DELETE", "OPTIONS"],
+    allow_headers=["Content-Type"], # sending json payloads
+)
+
+class Prompt(BaseModel):
+    prompt: str = Field(max_length=MAX_PROMPT_CHARS)
+
 async def run_guarded(fn, *args):
     """Run fn in the worker pool, or reject immediately with 503 if the pool is full"""
     global inflight
@@ -42,30 +67,6 @@ async def run_guarded(fn, *args):
     except asyncio.TimeoutError:
         raise HTTPException(status_code=504, detail="Request took too long")
     
-def init_conn():
-    uvicorn.run(app)
-
-app = FastAPI()
-
-# class Message(BaseModel):
-#     message: str
-
-# CORS (Cross-Origin Resource Sharing) middleware configuration
-origins = [
-    "http://localhost:5173",
-]
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=origins,
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
-class Prompt(BaseModel):
-    prompt: str = Field(max_length=MAX_PROMPT_CHARS)
-
 @app.post("/prompt")
 async def process_prompt(data: Prompt):
     await run_guarded(lambda: core.process_prompt(prompt=data.prompt))

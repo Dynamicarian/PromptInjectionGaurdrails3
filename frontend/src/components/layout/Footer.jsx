@@ -12,7 +12,8 @@ function Footer() {
 
         {/* Footer items */}
         <div className="footer-links">
-          <NavLink to="/aboutUs">About Us</NavLink>
+          <NavLink to="/contact">Contact</NavLink>
+          <NavLink to="/faq">FAQ</NavLink>
         </div>
       </div>
     </footer>

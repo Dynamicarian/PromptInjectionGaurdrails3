@@ -26,7 +26,7 @@ function HomePage() {
       navigate('/results', {state: {prompt}}); 
     } catch (error)
     { 
-      console.log(error.response);               // useful while debugging
+      console.log(error.response);              
       const status = error.response?.status;
 
       if (status === 422) {

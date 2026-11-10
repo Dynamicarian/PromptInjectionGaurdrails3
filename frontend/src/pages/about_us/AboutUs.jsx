@@ -38,7 +38,7 @@ const FAQS = [
   },
 ];
 
-const CONTACT_EMAIL = 'thisemailwillchange@gmail.com';
+const CONTACT_EMAIL = 'thisisnotarealemail@gmail.com';
 
 function Chevron() {
   return (
