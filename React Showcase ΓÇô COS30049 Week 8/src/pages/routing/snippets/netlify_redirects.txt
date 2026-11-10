@@ -1,2 +1,0 @@
-# public/_redirects  (Netlify) – serve index.html for every path, status 200
-/*    /index.html   200
