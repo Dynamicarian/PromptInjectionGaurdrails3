@@ -74,4 +74,18 @@ The primary adversaries facing this application includes a person that wants an 
 Successful execution of these attacks would severely degrade user trust, violate data privacy standards, and compromise system availability. By explicitly identifying these vectors resource exhaustion via DoS and query manipulation via SQLi. We establish the foundational justification for the multi-layered defensive controls implemented in section 2.7, including strict input sanitization, parameterized queries, and concurrency guards.
 
 # Advanced attack 
-The advanced security that we pick is attacks on model through its api which is detection evasion. 
+The Advanced Security feature protects the Prompt Injection Guardrail against **Unicode-based detection evasion attacks**, where attackers use visually similar characters to disguise malicious prompts and bypass detection.
+### How It Works
+1. **Evasion Attack:** Converts standard characters into fullwidth Unicode characters to test whether malicious prompts can bypass the detection model.
+2. **NFKC Defence:** Normalises Unicode characters before passing prompts to the machine-learning model while preserving the original input for display.
+3. **Security Evaluation:** Compares malicious and benign prompt classifications before and after implementing the defence.
+4. **Performance Benchmarking:** Measures the additional processing time introduced by NFKC normalisation.
+### Experimental Results
+The experiment used **40 malicious and 40 benign prompts**, testing both their original and fullwidth versions.
+### Performance Cost
+The benchmark used **80 prompts**, with 20 repetitions per timing sample and 200 samples per variant.
+The results indicate that NFKC normalisation significantly reduces the success of the tested evasion attacks while introducing minimal preprocessing overhead.
+### Advanced Security Evaluation Page
+The application includes an Advanced Security Evaluation webpage at `/security-results` to visualise the experimental findings.
+
+
