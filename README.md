@@ -1,6 +1,6 @@
 # PromptInjectionGaurdrails3
 
-## TEMP:
+## How to run:
 1. Install python 3.14.4
 2. Install pip 26.2.1
 3. Navigate to backend:
