@@ -3,8 +3,6 @@ import { useNavigate } from 'react-router';
 import api from '../../api'
 import './HomePage.css';
 
-const MAX_PROMPT_CHARS = 5000;
-
 function HomePage() {
   const [prompt, setPrompt] = useState("");
   const [error, setError] = useState("");
